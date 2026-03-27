@@ -1,0 +1,525 @@
+/* ════════════════════════════════════════════════════════════════════
+   style.css — Rocky P. Jacinto CS Student Portfolio
+   Sections:
+     1.  CSS Variables
+     2.  Reset
+     3.  Utility
+     4.  Header / Nav
+     5.  Hero
+     6.  Section Base
+     7.  About
+     8.  Interests
+     9.  Projects / Journey
+    10.  Footer
+    11.  Tablet Breakpoint  (≥ 640px)
+    12.  Desktop Breakpoint (≥ 1024px)
+    13.  Mobile Nav Toggle  (≤ 1023px)
+    14.  Animations
+════════════════════════════════════════════════════════════════════ */
+
+
+/* ── 1. CSS Variables ──────────────────────────────────────────── */
+:root {
+  --ink:          #0d0d0d;
+  --paper:        #f5f0e8;
+  --accent:       #2a6fc8;       /* techy blue for IT theme */
+  --accent-glow:  #2a6fc822;
+  --muted:        #8a8070;
+  --rule:         #d4cdc0;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-mono:    'DM Mono', monospace;
+  --gap:          clamp(1rem, 3vw, 2.5rem);
+  --max-w:        1200px;
+}
+
+
+/* ── 2. Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin:     0;
+  padding:    0;
+}
+html { scroll-behavior: smooth; }
+body {
+  background:  var(--paper);
+  color:       var(--ink);
+  font-family: var(--font-display);
+  font-size:   clamp(1rem, 1.2vw, 1.1rem);
+  line-height: 1.7;
+  overflow-x:  hidden;
+}
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a   { color: inherit; text-decoration: none; }
+
+
+/* ── 3. Utility ────────────────────────────────────────────────── */
+.container {
+  width:         min(var(--max-w), 100% - 2 * var(--gap));
+  margin-inline: auto;
+}
+.label {
+  font-family:    var(--font-mono);
+  font-size:      .65rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color:          var(--muted);
+}
+
+
+/* ── 4. Header / Nav ───────────────────────────────────────────── */
+header {
+  position:      sticky;
+  top:           0;
+  z-index:       100;
+  background:    var(--paper);
+  border-bottom: 1px solid var(--rule);
+  padding:       .9rem 0;
+}
+.nav-inner {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  gap:             1rem;
+}
+.logo {
+  font-size:      clamp(1.4rem, 3vw, 1.8rem);
+  font-weight:    300;
+  letter-spacing: .06em;
+}
+.logo span { color: var(--accent); font-style: italic; }
+
+nav {
+  display:     flex;
+  gap:         clamp(.8rem, 2vw, 2rem);
+  align-items: center;
+}
+nav a {
+  font-family:    var(--font-mono);
+  font-size:      .7rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color:          var(--muted);
+  transition:     color .2s;
+}
+nav a:hover { color: var(--accent); }
+
+/* Hamburger — hidden on desktop */
+.burger {
+  display:        none;
+  flex-direction: column;
+  gap:            5px;
+  cursor:         pointer;
+  border:         none;
+  background:     none;
+  padding:        4px;
+}
+.burger span {
+  display:    block;
+  width:      22px;
+  height:     1.5px;
+  background: var(--ink);
+  transition: .3s;
+}
+
+
+/* ── 5. Hero ───────────────────────────────────────────────────── */
+#hero {
+  position:              relative;
+  min-height:            clamp(420px, 80vh, 760px);
+  display:               grid;
+  grid-template-columns: 1fr;   /* mobile: single column */
+  align-items:           end;
+  overflow:              hidden;
+}
+.hero-bg {
+  position:   absolute;
+  inset:      0;
+  background: linear-gradient(160deg, #0a1020 0%, #101828 45%, #2a6fc822 100%);
+}
+/* Decorative grid lines overlay */
+.hero-bg::after {
+  content:          '';
+  position:         absolute;
+  inset:            0;
+  background-image:
+    linear-gradient(rgba(245,240,232,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,240,232,.04) 1px, transparent 1px);
+  background-size:  60px 60px;
+}
+.hero-content {
+  position: relative;
+  z-index:  2;
+  padding:  clamp(2.5rem, 6vw, 6rem) var(--gap) clamp(3rem, 7vw, 7rem);
+}
+.hero-issue {
+  font-family:    var(--font-mono);
+  font-size:      .62rem;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  margin-bottom:  1.4rem;
+}
+.hero-title {
+  font-size:      clamp(2.8rem, 9vw, 8rem);
+  font-weight:    300;
+  line-height:    1;
+  color:          var(--paper);
+  letter-spacing: -.01em;
+}
+.hero-title em {
+  font-style: italic;
+  color:      var(--accent);
+  display:    block;
+}
+.hero-sub {
+  margin-top: 1.5rem;
+  max-width:  480px;
+  color:      #8090a8;
+  font-size:  clamp(1rem, 1.5vw, 1.15rem);
+  font-style: italic;
+}
+.hero-cta {
+  display:        inline-flex;
+  align-items:    center;
+  gap:            .5rem;
+  margin-top:     2.5rem;
+  padding:        .75rem 1.75rem;
+  border:         1px solid var(--accent);
+  color:          var(--accent);
+  font-family:    var(--font-mono);
+  font-size:      .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  transition:     background .25s, color .25s;
+}
+.hero-cta:hover { background: var(--accent); color: var(--paper); }
+.hero-scroll-hint {
+  position:       absolute;
+  bottom:         1.5rem;
+  right:          var(--gap);
+  font-family:    var(--font-mono);
+  font-size:      .6rem;
+  letter-spacing: .15em;
+  color:          #3a4050;
+  text-transform: uppercase;
+  writing-mode:   vertical-rl;
+  z-index:        2;
+}
+
+
+/* ── 6. Section Base ───────────────────────────────────────────── */
+section { padding: clamp(3.5rem, 7vw, 7rem) 0; }
+
+.section-header {
+  display:       flex;
+  align-items:   baseline;
+  gap:           1rem;
+  margin-bottom: 3rem;
+}
+.section-header::after {
+  content:    '';
+  flex:       1;
+  height:     1px;
+  background: var(--rule);
+}
+.section-number {
+  font-family:    var(--font-mono);
+  font-size:      .62rem;
+  color:          var(--accent);
+  letter-spacing: .1em;
+}
+.section-title {
+  font-size:      clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight:    300;
+  letter-spacing: -.01em;
+}
+
+
+/* ── 7. About ──────────────────────────────────────────────────── */
+#about { background: var(--paper); }
+
+.about-grid {
+  display:               grid;
+  grid-template-columns: 1fr;   /* mobile */
+  gap:                   var(--gap);
+}
+.about-visual {
+  aspect-ratio: 4/3;
+  overflow:     hidden;
+  position:     relative;
+}
+.about-visual-inner {
+  width:           100%;
+  height:          100%;
+  background:      linear-gradient(135deg, #0a1020 0%, #1a2840 60%, #2a6fc8 100%);
+  display:         flex;
+  align-items:     center;
+  justify-content: center;
+  font-size:       clamp(5rem, 14vw, 10rem);
+  color:           rgba(245,240,232,.08);
+  font-style:      italic;
+  letter-spacing:  -.03em;
+  user-select:     none;
+}
+.about-visual-inner::after {
+  content:          '';
+  position:         absolute;
+  inset:            0;
+  background-image: radial-gradient(circle at 30% 70%, rgba(42,111,200,.4) 0%, transparent 60%);
+}
+.about-text {
+  display:         flex;
+  flex-direction:  column;
+  justify-content: center;
+  gap:             1.2rem;
+}
+.about-lead {
+  font-size:   clamp(1.25rem, 2.5vw, 1.7rem);
+  font-style:  italic;
+  font-weight: 300;
+  line-height: 1.45;
+  color:       var(--ink);
+}
+.about-body { color: #4a4035; line-height: 1.9; }
+
+.stat-row {
+  display:     flex;
+  gap:         2rem;
+  padding-top: 1rem;
+  border-top:  1px solid var(--rule);
+}
+.stat strong {
+  display:     block;
+  font-size:   clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  color:       var(--accent);
+  line-height: 1;
+}
+.stat span {
+  font-family:    var(--font-mono);
+  font-size:      .65rem;
+  color:          var(--muted);
+  text-transform: uppercase;
+  letter-spacing: .1em;
+}
+
+
+/* ── 8. Interests ──────────────────────────────────────────────── */
+#interests { background: #f0ece4; }
+
+.interests-grid {
+  display:               grid;
+  grid-template-columns: 1fr;   /* mobile */
+  gap:                   var(--gap);
+}
+.interest-card {
+  background:    var(--paper);
+  border:        1px solid var(--rule);
+  padding:       2rem 1.75rem;
+  transition:    border-color .25s, transform .25s;
+}
+.interest-card:hover {
+  border-color: var(--accent);
+  transform:    translateY(-4px);
+}
+.interest-icon {
+  font-size:     2rem;
+  margin-bottom: .8rem;
+  line-height:   1;
+}
+.interest-title {
+  font-size:      clamp(1.1rem, 2vw, 1.4rem);
+  font-weight:    400;
+  margin-bottom:  .6rem;
+  letter-spacing: -.01em;
+}
+.interest-body {
+  color:       #4a4035;
+  font-size:   .95rem;
+  line-height: 1.8;
+}
+
+
+/* ── 9. Projects / Journey ─────────────────────────────────────── */
+#projects { background: #0d0d0d; color: var(--paper); }
+#projects .section-title           { color: var(--paper); }
+#projects .section-header::after   { background: #1e1e1e; }
+#projects .section-number          { color: var(--accent); }
+
+.projects-grid {
+  display:               grid;
+  grid-template-columns: 1fr;   /* mobile */
+  gap:                   1px;
+  background:            #1a1a1a;
+}
+.project-card {
+  background: #111;
+  padding:    2rem 1.75rem;
+  transition: background .25s;
+}
+.project-card:hover       { background: #161616; }
+.project-card.featured    { border-top: 2px solid var(--accent); }
+
+.project-tag {
+  font-family:    var(--font-mono);
+  font-size:      .6rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  margin-bottom:  .8rem;
+}
+.project-title {
+  font-size:      clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight:    300;
+  color:          var(--paper);
+  margin-bottom:  .8rem;
+  letter-spacing: -.01em;
+}
+.project-desc {
+  color:       #7a7060;
+  font-size:   .95rem;
+  line-height: 1.85;
+  margin-bottom: 1.25rem;
+}
+.project-stack {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       .4rem;
+}
+.project-stack span {
+  font-family:    var(--font-mono);
+  font-size:      .6rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  border:         1px solid #2a6fc840;
+  padding:        .25rem .6rem;
+}
+
+
+/* ── 10. Footer ────────────────────────────────────────────────── */
+footer {
+  background: var(--ink);
+  color:      var(--paper);
+  padding:    clamp(2.5rem, 5vw, 4.5rem) 0;
+}
+.footer-grid {
+  display:               grid;
+  grid-template-columns: 1fr;    /* mobile */
+  gap:                   2.5rem;
+}
+.footer-brand .logo  { color: var(--paper); font-size: 1.6rem; }
+.footer-tagline      { margin-top: .6rem; font-style: italic; color: #5a6070; font-size: .95rem; }
+.footer-bio          { margin-top: .8rem; color: #3a4050; font-size: .88rem; line-height: 1.8; }
+
+.footer-col h4 {
+  font-family:    var(--font-mono);
+  font-size:      .62rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color:          var(--accent);
+  margin-bottom:  1rem;
+}
+.footer-col ul           { list-style: none; }
+.footer-col ul li        { margin-bottom: .5rem; }
+.footer-col ul li a      { color: #5a6070; font-size: .9rem; transition: color .2s; }
+.footer-col ul li a:hover { color: var(--paper); }
+
+.footer-bottom {
+  margin-top:      3rem;
+  padding-top:     1.5rem;
+  border-top:      1px solid #1e1e1e;
+  display:         flex;
+  justify-content: space-between;
+  align-items:     center;
+  flex-wrap:       wrap;
+  gap:             1rem;
+}
+.footer-copy {
+  font-family:    var(--font-mono);
+  font-size:      .6rem;
+  letter-spacing: .1em;
+  color:          #303040;
+  text-transform: uppercase;
+}
+.footer-socials       { display: flex; gap: 1.2rem; }
+.footer-socials a {
+  font-family:    var(--font-mono);
+  font-size:      .6rem;
+  letter-spacing: .1em;
+  color:          #303040;
+  text-transform: uppercase;
+  transition:     color .2s;
+}
+.footer-socials a:hover { color: var(--accent); }
+
+
+/* ── 11. Tablet Breakpoint — ≥ 640px ───────────────────────────── */
+@media (min-width: 640px) {
+  /* About: side by side */
+  .about-grid { grid-template-columns: 1fr 1fr; align-items: center; }
+
+  /* Interests: 2 columns */
+  .interests-grid { grid-template-columns: 1fr 1fr; }
+
+  /* Projects: 2 columns (featured spans full) */
+  .projects-grid          { grid-template-columns: 1fr 1fr; }
+  .project-card.featured  { grid-column: 1 / -1; }
+
+  /* Footer: 2 columns */
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+
+/* ── 12. Desktop Breakpoint — ≥ 1024px ─────────────────────────── */
+@media (min-width: 1024px) {
+  /* Hero: left-heavy two-column feel */
+  #hero         { grid-template-columns: 1fr 1fr; }
+  .hero-content { max-width: 640px; }
+
+  /* About: visual narrower than text */
+  .about-grid { grid-template-columns: 2fr 3fr; gap: clamp(2rem, 4vw, 5rem); }
+
+  /* Interests: 4 columns */
+  .interests-grid { grid-template-columns: repeat(4, 1fr); }
+
+  /* Projects: 3 columns, featured spans first two */
+  .projects-grid         { grid-template-columns: repeat(3, 1fr); }
+  .project-card.featured { grid-column: 1 / 3; }
+
+  /* Footer: 4 columns */
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+
+
+/* ── 13. Mobile Nav Toggle — ≤ 1023px ──────────────────────────── */
+@media (max-width: 1023px) {
+  .burger { display: flex; }
+
+  /* Nav hidden by default; toggled open via JS */
+  nav {
+    display:        none;
+    position:       absolute;
+    top:            100%;
+    left:           0;
+    right:          0;
+    background:     var(--paper);
+    flex-direction: column;
+    align-items:    flex-start;
+    padding:        1rem var(--gap) 1.5rem;
+    border-bottom:  1px solid var(--rule);
+    gap:            1.2rem;
+  }
+  nav.open { display: flex; }
+
+  header { position: relative; }  /* needed for absolute-positioned nav */
+}
+
+
+/* ── 14. Animations ────────────────────────────────────────────── */
+.fade-up {
+  opacity:    0;
+  transform:  translateY(28px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.fade-up.visible { opacity: 1; transform: none; }
